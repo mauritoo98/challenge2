@@ -13,16 +13,22 @@
     <div class="main">
         <div class="main__juego">
             <div class="juego__palabra">
-                <span class="span__palabra"></span>
+                <form class="ingresaPalabra" data-form>
+                    <label for="palabraNueva">Ingresa una nueva Palabra</label>
+                    <input type="text" name="palabraNueva" id="palabraNueva">
+                    <p data-error></p>
+                    <button class="nuevaPalabra">Agregar Palabra </button>
+                    <button class="comenzar">Comenzar juego</button>
+                </form>
             </div>
             <div class="juego__horca">
-                imagenes
+                <p class="palabra"></p>
             </div>
         </div>
 
     </div>
 
-    <script src="/assets/cript/verify-key.js"></script>
+    <script src="/assets/cript/nuevapalabra.js"></script>
 </body>
 
 </html>

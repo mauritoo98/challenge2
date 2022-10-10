@@ -15,9 +15,31 @@
 .juego__palabra {
     grid-column: 1 / 2;
     background-color: rgb(116, 53, 53);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .juego__horca {
     grid-column: 2 / 3;
     background-color: rgb(56, 29, 29);
+}
+
+.ingresaPalabra {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px
+}
+
+.invisible {
+    opacity: 0%;
+    color: rgba(255, 0, 0, 0);
+}
+
+.incorrecta {
+    display: flex;
+    margin: 0px 10px;
+    color: red;
 }
