@@ -34,60 +34,66 @@ botonPalabra.addEventListener("click", (evento) => {
 
 })
 
-botonJuego.addEventListener("click", (evento) => {
-    evento.preventDefault();
-    formulario.remove();
-    const palabraStorage = JSON.parse(localStorage.getItem("palabra"));
-    const palabraAleatoria = palabraStorage[Math.floor(Math.random() * palabraStorage.length)];
-    const palabraExtra = palabraAleatoria.nuevaPalabra;
-    const palabraArray = Array.from(palabraExtra);
-    const imagen = document.querySelector(".imagenHorca");
-    let aciertos = 0;
-    let vidas = 0;
+if (palabrasList.length = 0) {
+    alert("No se encontraron palabras, agrega una");
+}
+else {
+    botonJuego.addEventListener("click", (evento) => {
+        evento.preventDefault();
+        formulario.remove();
+        const palabraStorage = JSON.parse(localStorage.getItem("palabra"));
+        const palabraAleatoria = palabraStorage[Math.floor(Math.random() * palabraStorage.length)];
+        const palabraExtra = palabraAleatoria.nuevaPalabra;
+        const palabraArray = Array.from(palabraExtra);
+        const imagen = document.querySelector(".imagenHorca");
+        let aciertos = 0;
+        let vidas = 0;
 
-
-    for (var i = 0; i < palabraArray.length; i++) {
-        const crearGuiones = document.createElement("p");
-        crearGuiones.classList.add("incorrecta");
-        crearGuiones.textContent = "_";
-        juegoPalabra.appendChild(crearGuiones);
-    }
-
-    document.addEventListener("keyup", (events) => {
-        const letra = events.key;
-        const guiones = document.querySelectorAll(".incorrecta");
-        let palabraExiste = false;
 
         for (var i = 0; i < palabraArray.length; i++) {
-            letraPalabra = palabraArray[i];
-            if (letra == letraPalabra) {
-                guiones[i].innerHTML = letra;
-                palabraExiste = true;
-                aciertos = aciertos + 1;
+            const crearGuiones = document.createElement("p");
+            crearGuiones.classList.add("incorrecta");
+            crearGuiones.textContent = "_";
+            juegoPalabra.appendChild(crearGuiones);
+        }
+
+        document.addEventListener("keyup", (events) => {
+            const letra = events.key;
+            const guiones = document.querySelectorAll(".incorrecta");
+            let palabraExiste = false;
+
+            for (var i = 0; i < palabraArray.length; i++) {
+                letraPalabra = palabraArray[i];
+                if (letra == letraPalabra) {
+                    guiones[i].innerHTML = letra;
+                    palabraExiste = true;
+                    aciertos = aciertos + 1;
+                }
             }
-        }
 
-        if (aciertos == palabraArray.length) {
-            const botonIniciarNuevo = document.createElement("button");
-            botonIniciarNuevo.textContent = "volver a jugar";
-            juegoPalabra.appendChild(botonIniciarNuevo);
-            botonIniciarNuevo.addEventListener("click", () => {
+            if (aciertos == palabraArray.length) {
+                const botonIniciarNuevo = document.createElement("button");
+                botonIniciarNuevo.textContent = "volver a jugar";
+                juegoPalabra.appendChild(botonIniciarNuevo);
+                botonIniciarNuevo.addEventListener("click", () => {
+                    volverForm();
+                });
+            }
+            else if (vidas == 6) {
+                alert("perdiste, la palabra era: " + palabraArray.join(''));
                 volverForm();
-            });
-        }
-        else if (vidas == 6) {
-            alert("perdiste, la palabra era: " + palabraArray.join(''));
-            volverForm();
-        }
+            }
 
-        if (!palabraExiste) {
-            vidas = vidas + 1;
-            imagen.setAttribute("src", `assets/imagenes/horca${vidas}.png`);
-        }
+            if (!palabraExiste) {
+                vidas = vidas + 1;
+                imagen.setAttribute("src", `assets/imagenes/horca${vidas}.png`);
+            }
+
+        })
 
     })
+}
 
-})
 
 function volverForm() {
     juegoPalabra.remove();
